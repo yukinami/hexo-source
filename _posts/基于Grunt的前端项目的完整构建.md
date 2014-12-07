@@ -203,7 +203,9 @@ Gruntfile
 	>Then it looks for references to assets (i.e. images, scripts, ...), and tries to replace them with their revved version if it can find one on disk
 13. `htmlmin`进行最终的对HTML进行压缩
 
+**完整示例请[参考][4]**
+
 [1]: https://github.com/gruntjs/grunt-contrib-connect "grunt-contrib-connect"
 [2]: https://github.com/intesso/connect-livereload    "connect-livereload"
 [3]: https://github.com/drewzboto/grunt-connect-proxy#adding-the-middleware "grunt-connect-proxy"
-
+[4]: https://gist.github.com/yukinami/3849e4c007a503222dc2
