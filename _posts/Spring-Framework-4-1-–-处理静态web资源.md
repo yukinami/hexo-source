@@ -13,6 +13,8 @@ Spring Framework 4.1 的release已经有一阵子了，今天终于有点时间�
 
 > 在Spring Framework 4.1中，我们使用依赖于优化的路径，这种优化在构件时使用最好的外部工具，在运行时使用Resolvers 和和Transformers 。
 
+<!--more-->
+
 比如说，我们可以用yeoman，grunt，bower搭建一个面向前端开发者的项目，在开发阶段，利用ResourceResolvers直接引用工程源代码的资源路径。在生产环境，再引用经过其他工具优化过的构建完成的资源。正式通过这种方式带给了我们一种全新的开发体验。 **Spring为这两个类提供了一些默认的实现类。**
 
 <table>

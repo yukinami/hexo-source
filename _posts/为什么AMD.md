@@ -23,6 +23,8 @@ date: 2014-11-05 17:48:54
     this.myExample = function () {};
 }());</pre>
 
+<!--more-->
+
 当今的JavasScript代码片段是如何定义的？
 
 *   通过立即执行函数定义

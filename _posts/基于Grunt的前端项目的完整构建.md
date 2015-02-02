@@ -13,6 +13,8 @@ date: 2014-12-07 14:25:54
 
 ![项目结构](/img/CE761032-FAA5-4FFE-9FC7-F87BA7DFF423.jpeg)
 
+<!--more-->
+
 Gruntfile
 =========
 
