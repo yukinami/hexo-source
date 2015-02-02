@@ -317,7 +317,7 @@ bind(NOODLES_ACCOUNT_KEY).toProvider(
     scope);
 ```
 
-扩展API Bingding
+扩展API Binding
 ----------------
 利用Provider的机制，扩展API Binding，不再依赖access token，而是依赖Account的Provider，即可较为完美解决之前的问题。
 
