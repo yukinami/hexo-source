@@ -177,6 +177,18 @@ Authenticator需要继承`AbstractAccountAuthenticator`。
 
 - getAuthToken
     获取用户token，实现逻辑可以参考官方文档对`AccountManager#getAuthToken`的[描述][2]：如果之前已经生成了token并缓存，可以通过`AccountManager#peekAuthToken`返回之前缓存的token，否则，如果通过`AccountManager#getPassword`能够获取的用户密码，则直接申请token，否则，跳转到登陆页面。
+    getAuthToken有三个重载方法：
+        public AccountManagerFuture<Bundle> getAuthToken (Account account, String authTokenType, Bundle options, Activity activity, AccountManagerCallback<Bundle> callback, Handler handler)
+    这个方法适用于应用在前台运行时调用，必要的情况下，会弹出请求用户输入证书
+
+        public AccountManagerFuture<Bundle> getAuthToken (Account account, String authTokenType, boolean notifyAuthFailure, AccountManagerCallback<Bundle> callback, Handler handler)
+    API level 14已经废弃，使用下面的方法
+
+        public AccountManagerFuture<Bundle> getAuthToken (Account account, String authTokenType, Bundle options, boolean notifyAuthFailure, AccountManagerCallback<Bundle> callback, Handler handler)
+    这个方法适用于应用在后台运行时调用，如果需要用户输入证书，可以发出一个通知（notification）。如果`notifyAuthFailure`设置为true，需要的情况下会发出一个会启动对应Intent的通知；如果设置为false，那么是由应用来处理返回的Intent。
+
+
+
 
 一些上述方法中使用到的参数：
 - accountType
