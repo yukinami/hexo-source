@@ -1,6 +1,6 @@
 title: Gradle plugin
 tags:
-  - radle
+  - gradle
   - 摘录
 date: 2015-02-02 13:23:15
 ---
