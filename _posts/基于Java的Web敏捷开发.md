@@ -47,13 +47,13 @@ application-dev.properties
 
 ```
 flyway.locations=classpath:db/migration/development
-```  
+```
 
 application-prod.properties
 
 ```
 flyway.locations=classpath:db/migration/production
-``` 
+```
 
 服务器
 ------
@@ -221,6 +221,7 @@ CI工具使用Jenkins或许更为合适，拥有良好的插件机制可以更�
 
 配置如下
 
+```
 cargo {
     containerId = 'tomcat8x'
     port = 9000
@@ -237,10 +238,7 @@ cargo {
     }
 
 }
-
-
-
-
+```
 
 
 [spring-initializr]: https://start.spring.io/

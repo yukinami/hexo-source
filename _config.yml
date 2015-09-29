@@ -37,6 +37,7 @@ relative_link: false
 highlight:
   enable: true
   line_number: true
+  auto_detect: true
   tab_replace:
 
 # Category & Tag
@@ -85,4 +86,9 @@ exclude_generator:
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: github
+  repo: git@github.com:yukinami/yukinami.github.io.git
+  branch: master
+
+plugins:
+- hexo-generator-feed
