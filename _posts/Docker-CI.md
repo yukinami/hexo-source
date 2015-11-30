@@ -50,7 +50,8 @@ docker run -d -p 5000:5000 --restart=always --name registry \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
   -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
   registry:2
-```    
+```
+
 
 然后通过拷贝`domain.crt`到客户端`/etc/docker/certs.d/myregistrydomain.com:5000/ca.crt`，让每个docker进程信任证书。
 
