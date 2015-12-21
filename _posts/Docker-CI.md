@@ -48,6 +48,10 @@ mkdir -p certs && openssl req \
 subjectAltName = IP:192.168.2.107
 ```
 
+否则客户端连接时会报错
+
+> Failed to tls handshake with 192.168.2.107 x509: cannot validate certificate for 192.168.2.107 because it doesn't contain any IP SANs
+
 然后重启容器启用TLS
 
 ```
