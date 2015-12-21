@@ -42,6 +42,12 @@ mkdir -p certs && openssl req \
   -x509 -days 365 -out certs/domain.crt
 ```
 
+如果生成自签名证书的host地址是IP，则需要编辑/etc/ssl/openssl.cnf，在[v3_ca]段落内添加
+
+```
+subjectAltName = IP:192.168.2.107
+```
+
 然后重启容器启用TLS
 
 ```
@@ -54,7 +60,6 @@ docker run -d -p 5000:5000 --restart=always --name registry \
 
 
 然后通过拷贝`domain.crt`到客户端`/etc/docker/certs.d/myregistrydomain.com:5000/ca.crt`，让每个docker进程信任证书。
-
 
 
 ### Storage
