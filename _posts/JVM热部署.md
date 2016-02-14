@@ -1,6 +1,8 @@
 title: JVM热部署
 date: 2015-07-14 16:30:56
 tags:
+- Java
+- 热部署
 ---
 
 JVM Hot Swapping
