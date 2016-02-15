@@ -10,6 +10,8 @@ tags:
 
 如果代理添加了通常约定的`X-Forwarded-For`，`X-Forwarded-Proto`， 设置`server.use-forward-headers`为`true`， 就能生成正确的链接。
 
+<!--more-->
+
 ## 自定义Tomcat代理配置
 
 如果使用Tomcat，可以自定义携带“forwarded”信息的header头的名字。
