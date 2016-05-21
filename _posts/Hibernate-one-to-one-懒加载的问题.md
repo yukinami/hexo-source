@@ -84,6 +84,17 @@ Spring 4.3之前可能需要手动的设置LoadTimeWeaver，[这里][4]是相关
     }
 ```    
 
+### 使用bytecode instrumentation后对Jackson带来的影响
+
+使用织入后，实体对象会包含额外的FieldHandler属性，Jackson进行序列化时会出错，需要忽略掉这行属性。
+
+```
+@JsonIgnoreType
+private class MixInForFieldInterceptor {
+}
+
+objectMapper.addMixIn(FieldHandler.class, MixInForFieldInterceptor.class);
+```   
 
 [1]: https://developer.jboss.org/wiki/SomeExplanationsOnLazyLoadingone-to-one
 [2]: http://justonjava.blogspot.sg/2010/09/lazy-one-to-one-and-one-to-many.html
