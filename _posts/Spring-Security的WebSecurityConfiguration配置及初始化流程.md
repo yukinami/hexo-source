@@ -10,6 +10,8 @@ tags:
 
 ### 入口 WebSecurityConfiguration
 
+`WebSecurityConfiguration`的目的是配置`WebSecurity`来创建[FilterChainProxy][FilterChainProxy]
+
 ```
 @Autowired(required = false)
 public void setFilterChainProxySecurityConfigurer(
@@ -73,9 +75,7 @@ public void init(final WebSecurity web) throws Exception {
 	});
 }
 ```
-这里需要注意的是如果有多个WebSecurityConfigurerAdapter的子类实例，那么只有最后一个HttpSecurity中的FilterSecurityInterceptor才会生效，其余的会被覆盖。
-
-
+`WebSecurity`中的`FilterSecurityInterceptor`最终还会用来构建`WebInvocationPrivilegeEvaluator`用于页面标签的权限控制。从目前源码上来看，页面标签的`WebInvocationPrivilegeEvaluator`只会使用最后设置到`WebSecurity`中的`FilterSecurityInterceptor`。如果有多个WebSecurityConfigurerAdapter的子类实例，那么只有最后一个HttpSecurity中的FilterSecurityInterceptor才会生效，其余的会被覆盖。***所以，页面标签的权限控制要注意`HttpSecurity`配置的顺序，`WebSecurityConfigurerAdapter`默认优先度是100***
 
 ```
 /**
@@ -124,7 +124,7 @@ protected final HttpSecurity getHttp() throws Exception {
 
 ### 构建Filter
 
-WebSecurity最终会构建Servlet Filter
+WebSecurity最终会构建Servlet Filter。HttpSecurity的performBuild则最终会构建DefaultSecurityFilterChain对象，然后添加到Filter的securityFilterChains中
 
 ```
 protected final O doBuild() throws Exception {
@@ -149,8 +149,6 @@ protected final O doBuild() throws Exception {
 	}
 }
 ```
-
-HttpSecurity的performBuild则最终会构建DefaultSecurityFilterChain对象，然后添加到Filter的securityFilterChains中
 
 ```
 @Override
@@ -193,6 +191,9 @@ protected Filter performBuild() throws Exception {
 
 ## 相关的一些问题
 
-### Spring Boot的H2ConsoleAutoConfiguration
+### Spring Boot的H2ConsoleAutoConfiguration导致页面标签的权限控制不正常
 
-如果Spring Boot启用了H2 Console的话，由于H2ConsoleAutoConfiguration并没有注解`@ConditionalOnMissingBean(WebSecurityConfiguration.class)`，所以即便应用配置了WebSecurityConfiguration的子类，如果没有显示地把`security.basic.enabled`设置成false的话，最终还是会导致`H2ConsoleSecurityConfiguration`配置的套用，WebSecurity的FilterSecurityInterceptor会被覆盖。
+如果Spring Boot启用了H2 Console的话，由于H2ConsoleAutoConfiguration并没有注解`@ConditionalOnMissingBean(WebSecurityConfiguration.class)`，所以即便应用配置了WebSecurityConfiguration的子类，如果没有显示地把`security.basic.enabled`设置成false的话，最终还是会导致`H2ConsoleSecurityConfiguration`配置的套用，`H2ConsoleSecurityConfiguration`的优先度是`SecurityProperties.BASIC_AUTH_ORDER - 10`，比较低，反而容易导致`WebSecurity`的`FilterSecurityInterceptor`被覆盖。
+
+[livereload-extensions]: https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#filter-chain-proxy
+
